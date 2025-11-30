@@ -1,20 +1,14 @@
-SYSC4001 Assignment 3 – Part 1
+SYSC4001 Assignment 3 Part 1
 
-This repository contains my implementation of Part 1, including:
+This repository includes my work for the EP and RR schedulers for Part 1 of the assignment.
+Everything was tested on Linux (WSL Ubuntu 24.04).
 
-Event-Driven Priority Scheduler (EP)
-
-Round Robin Priority Scheduler (RR)
-
-All development and testing were done on WSL Ubuntu 24.04.
-
-📂 1. Folder Structure
-Assignment_3/
+1. Folder Structure
+SYSC4001_A3P1/
 │
 ├── interrupts_student1_student2_EP.cpp
 ├── interrupts_student1_student2_RR.cpp
-├── interrupts_student1_student2_EP_RR.cpp   # optional combined version
-│
+├── interrupts_student1_student2_EP_RR.cpp
 ├── interrupts_student1_student2.hpp
 │
 ├── input_files/
@@ -23,39 +17,74 @@ Assignment_3/
 │   ├── test3.txt
 │   └── test4.txt
 │
-├── execution.txt        # auto-generated output
+├── execution.txt
 │
 └── README.md
 
-⚙️ 2. How to Compile and Run (No Makefile)
 
-All commands must be executed inside Linux / WSL.
+All input files are kept in the input_files folder, and each program writes its output to execution.txt.
 
-📘 2.1 Event-Driven Priority Scheduler (EP)
+2. How to Compile and Run
+
+All commands must be run in Linux.
+
+2.1 EP Scheduler
+
+Go into the folder:
+
+cd SYSC4001_A3P1
+
+
+Compile:
+
 g++ interrupts_student1_student2_EP.cpp -o EP
+
+
+Run with any test file:
+
 ./EP input_files/test1.txt
 
 
-The simulator logs all transitions to:
+The program will load the input file and generate execution.txt with all state transitions.
 
-execution.txt
+2.2 RR Scheduler
 
-📙 2.2 Round Robin Priority Scheduler (RR)
+Go into the folder:
+
+cd SYSC4001_A3P1
+
+
+Compile:
+
 g++ interrupts_student1_student2_RR.cpp -o RR
+
+
+Run:
+
 ./RR input_files/test2.txt
 
 
-Uses quantum = 100ms
+The RR version uses a 100ms quantum and respects priority.
 
-Still respects priority ordering
+2.3 Combined EP + RR (Optional)
 
-📗 2.3 Combined EP + RR Version (Optional)
+Go into the folder:
+
+cd SYSC4001_A3P1
+
+
+Compile:
+
 g++ interrupts_student1_student2_EP_RR.cpp -o EP_RR
+
+
+Run:
+
 ./EP_RR input_files/test3.txt
 
-📥 3. Input Format
+3. Input Format
 
-Each line in the input file defines a process:
+Each process is defined on one line:
 
 arrival_time, PID, priority, cpu_time, io_frequency, io_duration
 
@@ -64,87 +93,19 @@ Example:
 
 10, 1, 0, 10, 5, 1
 
-📤 4. Output Format
+4. Output
 
-All state transitions are written to execution.txt in a table:
+All transitions (NEW → READY, READY → RUNNING, RUNNING → WAITING, WAITING → READY, TERMINATED, and RR preemptions) are written to:
 
-+------------------------------------------------+
-|Time of Transition |PID | Old State | New State |
-+------------------------------------------------+
-|                 0 | 10 | NEW       | READY     |
-|                 0 | 10 | READY     | RUNNING   |
-|                 5 | 10 | RUNNING   | WAITING   |
-|                 6 | 10 | WAITING   | READY     |
-|                 6 | 10 | READY     | RUNNING   |
-|                11 | 10 | RUNNING   | TERMINATED|
-+------------------------------------------------+
+execution.txt
 
 
-Transitions include:
+The format matches the required transition table from the assignment.
 
-NEW → READY
+5. Notes
 
-READY → RUNNING
+Running a new test will overwrite execution.txt.
 
-RUNNING → WAITING
+Input files must be stored in the input_files directory.
 
-WAITING → READY
-
-RUNNING → TERMINATED
-
-RUNNING → READY (RR preemption)
-
-🧠 5. Design Summary
-5.1 Event-Driven Priority Scheduler (EP)
-
-No preemption
-
-Highest-priority READY process always chosen
-
-Handles arrivals, I/O events, and termination
-
-Time-driven simulation (1ms increments)
-
-Timestamps adjusted according to assignment spec
-
-5.2 Round Robin Priority Scheduler (RR)
-
-Quantum = 100ms
-
-Preempts on:
-
-quantum expiry
-
-arrival of a higher-priority process
-
-Maintains READY queue ordered by priority
-
-Prevents starvation and ensures fairness
-
-🧪 6. Test Cases
-
-EP:
-
-./EP input_files/test1.txt
-./EP input_files/test2.txt
-./EP input_files/test3.txt
-./EP input_files/test4.txt
-
-
-RR:
-
-./RR input_files/test1.txt
-./RR input_files/test2.txt
-./RR input_files/test3.txt
-./RR input_files/test4.txt
-
-
-Outputs were verified manually based on expected scheduler behavior.
-
-📝 7. Notes
-
-Each run overwrites execution.txt.
-
-Ensure .txt files use LF line endings.
-
-All code tested on WSL Ubuntu 24.04.
+All testing was done in WSL on Ubuntu 24.04..04.
