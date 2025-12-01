@@ -66,11 +66,11 @@ struct PCB{
     unsigned int    io_freq;
     unsigned int    io_duration;
 
-    // I/O bookkeeping
+    
     unsigned int    time_since_last_io;
     unsigned int    io_remaining;
 
-    // NEW: external priority (lower value = higher priority)
+    
     unsigned int    priority;
 };
 
