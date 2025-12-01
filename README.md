@@ -13,7 +13,7 @@ Go into the folder:
 cd SYSC4001_A3P1
 
 Compile:
-g++ interrupts_student1_student2_EP.cpp -o EP
+g++ interrupts_101262776_101295283_EP.cpp -o EP
 
 Run with any test file:
 ./EP input_files/test1.txt
@@ -26,7 +26,7 @@ Go into the folder:
 cd SYSC4001_A3P1
 
 Compile:
-g++ interrupts_student1_student2_RR.cpp -o RR
+g++ interrupts_101262776_101295283_RR.cpp -o RR
 
 Run:
 ./RR input_files/test2.txt
@@ -39,7 +39,7 @@ Go into the folder:
 cd SYSC4001_A3P1
 
 Compile:
-g++ interrupts_student1_student2_EP_RR.cpp -o EP_RR
+g++ interrupts_101262776_101295283_EP_RR.cpp -o EP_RR
 
 Run:
 ./EP_RR input_files/test3.txt
